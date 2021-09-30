@@ -1,0 +1,165 @@
+package org.malv.graphl.utils.primeng
+
+import com.querydsl.core.BooleanBuilder
+import com.querydsl.core.types.dsl.*
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Sort
+import java.util.*
+import kotlin.collections.ArrayList
+
+public class Pagination(
+
+    public var page: Int,
+    public var size: Int,
+    public var direction: Int,
+    public val columns: String?,
+    private val filters: MutableList<Filter> = ArrayList()
+
+) {
+
+
+    public val query: BooleanBuilder = BooleanBuilder()
+
+    public val pagination: PageRequest
+        get() {
+
+            if (columns == null)
+                return PageRequest.of(page, size)
+
+            val c = columns.split(",")
+
+            val sort = if (direction == 1)
+                Sort.by(Sort.Direction.ASC, *c.toTypedArray())
+            else
+                Sort.by(Sort.Direction.DESC, *c.toTypedArray())
+
+
+            return PageRequest.of(page, size, sort)
+        }
+
+
+    public fun filter(path: NumberPath<Int>) {
+        val field = "$path".substringAfter(".")
+
+        filters
+            .filter { it.field == field }
+            .mapNotNull { it.filter(path) }
+            .forEach {
+                query.and(it)
+            }
+
+    }
+
+
+    public fun filter(path: StringPath) {
+        val field = "$path".substringAfter(".")
+
+        filters
+            .filter { it.field == field }
+            .mapNotNull { it.filter(path) }
+            .forEach {
+                query.and(it)
+            }
+
+    }
+
+    public fun rawFilter(field: String): String? {
+        return filters.firstOrNull { it.field == field }?.value
+    }
+
+    public fun addFilter(field: String, value: Any, matchMode: String? = null) {
+        filters.add(Filter(field, value.toString(), matchMode, null))
+    }
+
+    public fun addFilter(filter: BooleanExpression) {
+        query.and(filter)
+    }
+
+    public fun <T : Enum<T>?> filter(path: EnumPath<T>, converter: (String) -> T) {
+        val field = "$path".substringAfter(".")
+
+        filters
+            .filter { it.field == field }
+            .mapNotNull { it.filter(path, converter) }
+            .forEach {
+                query.and(it)
+            }
+
+    }
+
+    public fun filter(path: BooleanPath) {
+        val field = "$path".substringAfter(".")
+
+        filters
+            .filter { it.field == field }
+            .mapNotNull { it.filter(path) }
+            .forEach {
+                query.and(it)
+            }
+    }
+
+
+    public fun filter(path: DateTimePath<Date>) {
+        val field = "$path".substringAfter(".")
+
+        filters
+            .filter { it.isValid }
+            .filter { it.field == field }
+            .mapNotNull { it.filter(path) }
+            .forEach {
+                query.and(it)
+            }
+    }
+
+
+    public fun filter(path: DatePath<Date>) {
+        val field = "$path".substringAfter(".")
+
+        filters
+            .filter { it.isValid }
+            .filter { it.field == field }
+            .mapNotNull { it.filter(path) }
+            .forEach {
+                query.and(it)
+            }
+    }
+
+
+
+    public fun filterLong(path: NumberPath<Long>) {
+        val field = "$path".substringAfter(".")
+
+        filters
+            .filter { it.isValid }
+            .filter { it.field == field }
+            .mapNotNull { it.filterLong(path) }
+            .forEach {
+                query.and(it)
+            }
+
+    }
+
+
+    public fun customFilter(field: String, operation: (value: String?, BooleanBuilder) -> Unit) {
+
+        filters
+            .filter { it.isValid }
+            .filter { it.field == field }
+            .forEach {
+                operation(it.value, query)
+            }
+
+    }
+
+
+    public fun global(vararg path: StringPath) {
+
+        val global = filters.firstOrNull { it.field == "global" } ?: return
+        val value = global.value ?: return
+
+        value.split(" ").forEach { v ->
+            query.andAnyOf(*(path.map { it.containsIgnoreCase(v) }.toTypedArray()))
+        }
+    }
+
+}
