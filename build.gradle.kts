@@ -30,6 +30,11 @@ dependencies {
     implementation("org.testng:testng:7.4.0")
 
 
+    //Kotlin
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.5.10")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.10")
+
+
     //Graphql
     val graphqlVersion = "11.1.0"
     implementation("com.graphql-java-kickstart", "graphql-spring-boot-starter", graphqlVersion)
