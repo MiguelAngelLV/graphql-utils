@@ -69,8 +69,8 @@ public class Filter(
     public fun <T : Enum<T>?> filter(path: EnumPath<T>, converter: (String) -> T): BooleanExpression? {
         val value = value ?: return null
 
-        val single = converter(value)
-        val list = value.split(", ").mapNotNull { converter(it) }
+        val single = runCatching { converter(value) }.getOrNull()
+        val list = valueList.mapNotNull { runCatching { converter(it) }.getOrNull() }
 
         return when (matchMode) {
 
