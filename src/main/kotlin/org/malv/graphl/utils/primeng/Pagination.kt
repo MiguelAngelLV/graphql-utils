@@ -5,7 +5,6 @@ import com.querydsl.core.types.dsl.*
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
 import java.util.*
-import kotlin.collections.ArrayList
 
 public class Pagination(
 
@@ -147,6 +146,17 @@ public class Pagination(
             .filter { it.field == field }
             .forEach {
                 operation(it.value, query)
+            }
+
+    }
+
+    public fun customFilterList(field: String, operation: (value: List<String>, BooleanBuilder) -> Unit) {
+
+        filters
+            .filter { it.field == field }
+            .filter { it.valueList.isNotEmpty() }
+            .forEach {
+                operation(it.valueList, query)
             }
 
     }

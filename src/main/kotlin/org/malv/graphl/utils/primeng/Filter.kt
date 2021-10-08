@@ -3,7 +3,6 @@ package org.malv.graphl.utils.primeng
 import com.querydsl.core.types.dsl.*
 import khronos.beginningOfDay
 import khronos.endOfDay
-import org.springframework.data.querydsl.binding.QuerydslBindings
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -15,7 +14,7 @@ public class Filter(
 ) {
 
 
-    private val valueList: List<String> by lazy {
+    public val valueList: List<String> by lazy {
         value?.removePrefix("[")?.removeSuffix("]")?.split(", ") ?: emptyList()
     }
 
