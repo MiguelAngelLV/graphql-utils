@@ -42,6 +42,7 @@ public class Pagination(
 
         filters
             .filter { it.field == field }
+            .filter { it.isValid }
             .mapNotNull { it.filter(path) }
             .forEach {
                 query.and(it)
@@ -55,6 +56,7 @@ public class Pagination(
 
         filters
             .filter { it.field == field }
+            .filter { it.isValid }
             .mapNotNull { it.filter(path) }
             .forEach {
                 query.and(it)
@@ -79,6 +81,7 @@ public class Pagination(
 
         filters
             .filter { it.field == field }
+            .filter { it.isValid }
             .mapNotNull { it.filter(path, converter) }
             .forEach {
                 query.and(it)
@@ -91,6 +94,7 @@ public class Pagination(
 
         filters
             .filter { it.field == field }
+            .filter { it.isValid }
             .mapNotNull { it.filter(path) }
             .forEach {
                 query.and(it)
@@ -102,8 +106,8 @@ public class Pagination(
         val field = "$path".substringAfter(".")
 
         filters
-            .filter { it.isValid }
             .filter { it.field == field }
+            .filter { it.isValid }
             .mapNotNull { it.filter(path) }
             .forEach {
                 query.and(it)
@@ -115,8 +119,8 @@ public class Pagination(
         val field = "$path".substringAfter(".")
 
         filters
-            .filter { it.isValid }
             .filter { it.field == field }
+            .filter { it.isValid }
             .mapNotNull { it.filter(path) }
             .forEach {
                 query.and(it)
@@ -129,8 +133,8 @@ public class Pagination(
         val field = "$path".substringAfter(".")
 
         filters
-            .filter { it.isValid }
             .filter { it.field == field }
+            .filter { it.isValid }
             .mapNotNull { it.filterLong(path) }
             .forEach {
                 query.and(it)
@@ -142,8 +146,8 @@ public class Pagination(
     public fun customFilter(field: String, operation: (value: String?, BooleanBuilder) -> Unit) {
 
         filters
-            .filter { it.isValid }
             .filter { it.field == field }
+            .filter { it.isValid }
             .forEach {
                 operation(it.value, query)
             }

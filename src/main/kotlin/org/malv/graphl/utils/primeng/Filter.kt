@@ -15,17 +15,13 @@ public class Filter(
 
 
     public val valueList: List<String> by lazy {
-        value?.removePrefix("[")?.removeSuffix("]")?.split(", ") ?: emptyList()
+
+        value?.removePrefix("[")?.removeSuffix("]")?.split(", ")?.filter { it.isNotBlank() } ?: emptyList()
     }
 
     public fun filter(path: StringPath): BooleanExpression? {
 
         if (value == null) return null
-
-        val list = value
-            .removePrefix("[")
-            .removeSuffix("]")
-            .split(", ")
 
         return when (matchMode) {
             "startsWith" -> path.startsWithIgnoreCase(value)
@@ -36,7 +32,7 @@ public class Filter(
             "notEndWitch" -> path.endsWithIgnoreCase(value).not()
             "notContains" -> path.containsIgnoreCase(value).not()
             "notEquals" -> path.equalsIgnoreCase(value).not()
-            "in" -> path.`in`(list)
+            "in" -> path.`in`(valueList)
             else -> null
         }
     }
@@ -46,7 +42,7 @@ public class Filter(
         val value = value ?: return null
 
         val single = value.toIntOrNull()
-        val list = value.split(", ").mapNotNull { it.toIntOrNull() }
+        val list = valueList.mapNotNull { it.toIntOrNull() }
 
         return when (matchMode) {
             "gt" -> path.gt(single)
@@ -114,12 +110,9 @@ public class Filter(
 
         val value = value ?: return  null
 
-        if (value == "[]") return null
-
-
         val single = value.toLongOrNull()
 
-        val list = valueList.map { it.toLong() }.toList()
+        val list = valueList.mapNotNull { it.toLongOrNull() }
 
 
         return when (matchMode) {
