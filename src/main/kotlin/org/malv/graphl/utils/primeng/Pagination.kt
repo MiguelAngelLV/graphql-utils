@@ -12,7 +12,7 @@ public class Pagination(
     public var size: Int,
     public var direction: Int,
     public val columns: String?,
-    private val filters: MutableList<Filter> = ArrayList()
+    public val filters: MutableList<Filter> = ArrayList()
 
 ) {
 
