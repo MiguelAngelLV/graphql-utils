@@ -10,6 +10,11 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder
 
 public object MapperCreator {
 
+
+
+    public val mapper: ObjectMapper = create()
+
+
     public fun create(factory: JsonFactory = JsonFactory()): ObjectMapper {
         val builder = Jackson2ObjectMapperBuilder()
         val mapper = ObjectMapper(factory)

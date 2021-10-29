@@ -1,7 +1,6 @@
 package org.malv.graphl.utils.services
 
 import com.malv.codapa.backend.utils.field
-import com.malv.codapa.backend.utils.text
 import com.malv.codapa.backend.utils.update
 import org.malv.graphl.utils.Input
 import org.malv.graphl.utils.graphqlErrors
@@ -12,9 +11,8 @@ public open class ValidationService<T> {
 
 
     public open fun update(update: Input, element: T) {
-        val mapper = MapperCreator.create()
         update.remove("id")
-        mapper.update(element, update)
+        MapperCreator.mapper.update(element, update)
         validate(element)
     }
 

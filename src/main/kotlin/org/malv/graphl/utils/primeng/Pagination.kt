@@ -8,10 +8,10 @@ import java.util.*
 
 public class Pagination(
 
-    public var page: Int,
-    public var size: Int,
-    public var direction: Int,
-    public val columns: String?,
+    public var page: Int = 0,
+    public var size: Int = Int.MAX_VALUE,
+    public var direction: Int = -1,
+    public val columns: String? = null,
     public val filters: MutableList<Filter> = ArrayList()
 
 ) {
