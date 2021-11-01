@@ -25,14 +25,15 @@ kotlin {
 
 dependencies {
     //Spring
-    implementation("org.springframework.boot:spring-boot-starter-web:2.5.2")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa:2.5.3")
+    implementation("org.springframework.boot:spring-boot-starter-web:2.5.5")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa:2.5.5")
     implementation("org.testng:testng:7.4.0")
 
 
     //Kotlin
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.5.10")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.10")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.5.31")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.31")
+    implementation("org.apache.pdfbox:pdfbox:2.0.24")
 
 
     //Graphql
@@ -41,11 +42,11 @@ dependencies {
 
 
     //QueryDSL
-    val queryDslVersion = "4.4.0"
+    val queryDslVersion = "5.0.0"
     implementation ("com.querydsl", "querydsl-apt", queryDslVersion)
     implementation("com.querydsl", "querydsl-jpa", queryDslVersion)
     implementation ("com.querydsl:querydsl-apt:$queryDslVersion:jpa")
-    kapt("com.querydsl:querydsl-apt:4.4.0:jpa")
+    kapt("com.querydsl:querydsl-apt:5.0.0:jpa")
 
 
 
