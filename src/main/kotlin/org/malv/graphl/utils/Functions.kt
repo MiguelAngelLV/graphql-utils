@@ -1,8 +1,8 @@
 package org.malv.graphl.utils
 
+import com.querydsl.core.types.Predicate
 import graphql.GraphqlErrorException
-import graphql.language.SourceLocation
-import java.util.HashMap
+import org.springframework.data.querydsl.QuerydslPredicateExecutor
 
 
 public fun graphqlError(description: String): Throwable {
@@ -40,4 +40,9 @@ public fun Input.removeEmpty(key: String) {
         remove(key)
 
 
+}
+
+
+public fun <T> QuerydslPredicateExecutor<T>.findOneOrNull(predicate: Predicate): T? {
+    return findOne(predicate).orElse(null)
 }
