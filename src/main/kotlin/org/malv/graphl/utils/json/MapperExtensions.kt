@@ -1,4 +1,4 @@
-package com.malv.codapa.backend.utils
+package org.malv.graphl.utils.json
 
 import com.fasterxml.jackson.databind.ObjectMapper
 
