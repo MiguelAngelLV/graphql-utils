@@ -128,7 +128,6 @@ public class Pagination(
     }
 
 
-
     public fun filterLong(path: NumberPath<Long>) {
         val field = "$path".substringAfter(".")
 
