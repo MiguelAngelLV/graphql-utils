@@ -1,3 +1,4 @@
+
 package org.malv.graphl.utils.json
 
 
@@ -18,9 +19,6 @@ public object MapperCreator {
     public fun create(factory: JsonFactory = JsonFactory()): ObjectMapper {
         val builder = Jackson2ObjectMapperBuilder()
         val mapper = ObjectMapper(factory)
-
-        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL)
-
 
         builder.configure(mapper)
 
