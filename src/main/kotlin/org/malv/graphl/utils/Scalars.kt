@@ -30,7 +30,7 @@ public object Scalars {
                     return input
 
                 if (input is String)
-                    dateFormatter.parse(input)
+                    return dateFormatter.parse(input)
 
 
                 throw CoercingParseValueException("Get $input")
