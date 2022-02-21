@@ -142,15 +142,37 @@ public class Pagination(
     }
 
 
-    public fun customFilter(field: String, operation: (value: String?, BooleanBuilder) -> Unit) {
+    public fun customFilter(field: String, operation: (value: String, BooleanBuilder) -> Unit) {
 
         filters
             .filter { it.field == field }
             .filter { it.isValid }
+            .mapNotNull { it.value }
             .forEach {
-                operation(it.value, query)
+                operation(it, query)
             }
 
+    }
+
+    public fun customFilterLong(field: String, operation: (value: Long, BooleanBuilder) -> Unit) {
+        filters
+            .filter { it.field == field }
+            .filter { it.isValid }
+            .mapNotNull { it.value?.toLongOrNull() }
+            .forEach {
+                operation(it, query)
+            }
+    }
+
+
+    public fun customFilterInt(field: String, operation: (value: Int, BooleanBuilder) -> Unit) {
+        filters
+            .filter { it.field == field }
+            .filter { it.isValid }
+            .mapNotNull { it.value?.toIntOrNull() }
+            .forEach {
+                operation(it, query)
+            }
     }
 
     public fun customFilterList(field: String, operation: (value: List<String>, BooleanBuilder) -> Unit) {
