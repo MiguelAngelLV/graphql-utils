@@ -68,9 +68,20 @@ public class Pagination(
         return filters.firstOrNull { it.field == field }?.value
     }
 
-    public fun addFilter(field: String, value: Any, matchMode: String? = null) {
-        filters.add(Filter(field, value.toString(), matchMode, null))
+    public fun addFilter(field: String, value: Any?, matchMode: String? = null) {
+
+        if (value != null) filters.add(Filter(field, value.toString(), matchMode, null))
     }
+
+
+    public fun setFilter(field: String, value: Any?, matchMode: String? = null) {
+
+        filters.removeAll { it.field == field }
+
+        addFilter(field, value, matchMode)
+
+    }
+
 
     public fun addFilter(filter: BooleanExpression) {
         query.and(filter)
