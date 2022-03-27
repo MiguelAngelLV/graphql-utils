@@ -3,6 +3,8 @@ plugins {
     kotlin("jvm") 
     kotlin("plugin.spring")
     kotlin("kapt")
+    `maven-publish`
+
 }
 
 group = "org.malv.graphql-utils"
@@ -54,6 +56,10 @@ dependencies {
 
 
     implementation("com.github.MiguelAngelLV:khronos:15b000c09c")
+
+
+
+    implementation ("com.github.jitpack:gradle-simple:1.0")
 
 
 
