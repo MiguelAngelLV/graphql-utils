@@ -39,7 +39,7 @@ dependencies {
 
 
     //Graphql
-    val graphqlVersion = "11.1.0"
+    val graphqlVersion = "12.0.0"
     implementation("com.graphql-java-kickstart", "graphql-spring-boot-starter", graphqlVersion)
 
 
