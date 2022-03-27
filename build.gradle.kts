@@ -26,6 +26,14 @@ kotlin {
 }
 
 
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    kotlinOptions {
+        freeCompilerArgs = listOf("-Xjsr305=strict")
+        jvmTarget = "11"
+    }
+}
+
+
 dependencies {
     //Spring
     implementation("org.springframework.boot:spring-boot-starter-web:2.6.1")
