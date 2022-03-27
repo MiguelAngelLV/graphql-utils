@@ -1,8 +1,8 @@
 
 plugins {
-    kotlin("jvm") 
-    kotlin("plugin.spring")
-    kotlin("kapt")
+    kotlin("jvm") version "1.6.10"
+    kotlin("plugin.spring") version "1.6.10"
+    kotlin("kapt") version "1.6.10"
     `maven-publish`
 
 }
