@@ -16,7 +16,7 @@ public object Scalars {
 
         val coercing = object : Coercing<Date, String> {
 
-            override fun serialize(input: Any?): String {
+            override fun serialize(input: Any): String {
                 if (input is Date)
                     return dateFormatter.format(input)
 
@@ -24,7 +24,7 @@ public object Scalars {
             }
 
 
-            override fun parseValue(input: Any?): Date {
+            override fun parseValue(input: Any): Date {
 
                 if (input is Date)
                     return input
@@ -37,7 +37,7 @@ public object Scalars {
 
             }
 
-            override fun parseLiteral(input: Any?): Date {
+            override fun parseLiteral(input: Any): Date {
 
                 if (input !is StringValue)
                     throw CoercingParseLiteralException("Expected AST type 'StringValue'. Get $input ")
@@ -45,6 +45,8 @@ public object Scalars {
 
                 return parseValue(input.value)
             }
+
+
 
         }
         return GraphQLScalarType
@@ -61,7 +63,7 @@ public object Scalars {
         val coercing = object : Coercing<Date, String> {
             val formatter = SimpleDateFormat(format)
 
-            override fun serialize(input: Any?): String {
+            override fun serialize(input: Any): String {
                 if (input is Date)
                     return formatter.format(input)
 
@@ -69,7 +71,7 @@ public object Scalars {
             }
 
 
-            override fun parseValue(input: Any?): Date {
+            override fun parseValue(input: Any): Date {
 
                 if (input is Date)
                     return input
@@ -82,7 +84,7 @@ public object Scalars {
 
             }
 
-            override fun parseLiteral(input: Any?): Date {
+            override fun parseLiteral(input: Any): Date {
 
                 if (input !is StringValue)
                     throw CoercingParseLiteralException("Expected AST type 'StringValue'. Get $input ")
@@ -106,7 +108,7 @@ public object Scalars {
 
         val coercing = object : Coercing<ByteArray, String> {
 
-            override fun serialize(input: Any?): String {
+            override fun serialize(input: Any): String {
                 if (input is ByteArray)
                     return String(Base64.getEncoder().encode(input), StandardCharsets.US_ASCII)
 
@@ -114,7 +116,7 @@ public object Scalars {
             }
 
 
-            override fun parseValue(input: Any?): ByteArray {
+            override fun parseValue(input: Any): ByteArray {
 
                 if (input is ByteArray)
                     return input
@@ -127,7 +129,7 @@ public object Scalars {
 
             }
 
-            override fun parseLiteral(input: Any?): ByteArray {
+            override fun parseLiteral(input: Any): ByteArray {
 
                 if (input !is StringValue)
                     throw CoercingParseLiteralException("Expected AST type 'StringValue'. Get $input ")
