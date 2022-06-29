@@ -1,5 +1,6 @@
 package org.malv.graphl.utils.primeng
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.querydsl.core.BooleanBuilder
 import com.querydsl.core.types.dsl.*
 import org.springframework.data.domain.PageRequest
@@ -17,9 +18,11 @@ public class Pagination(
 ) {
 
 
+    @JsonIgnore
     public val query: BooleanBuilder = BooleanBuilder()
 
     public val pagination: PageRequest
+        @JsonIgnore
         get() {
 
             if (columns == null)

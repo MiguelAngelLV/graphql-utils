@@ -1,5 +1,6 @@
 package org.malv.graphl.utils.primeng
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.querydsl.core.types.dsl.*
 import khronos.beginningOfDay
 import khronos.endOfDay
@@ -14,6 +15,7 @@ public class Filter(
 ) {
 
 
+    @get:JsonIgnore
     public val valueList: List<String> by lazy {
 
         value?.removePrefix("[")?.removeSuffix("]")?.split(", ")?.filter { it.isNotBlank() } ?: emptyList()
@@ -60,6 +62,8 @@ public class Filter(
         }
 
     }
+
+
 
     public fun <T : Enum<T>?> filter(path: EnumPath<T>, converter: (String) -> T): BooleanExpression? {
         val value = value ?: return null
@@ -149,6 +153,7 @@ public class Filter(
 
 
     public val isValid: Boolean
+        @JsonIgnore
         get() = value != null && value != "[]"
 
 
