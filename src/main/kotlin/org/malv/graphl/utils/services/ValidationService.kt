@@ -11,7 +11,6 @@ public open class ValidationService<T> {
 
 
     public open fun update(update: Input, element: T) {
-        update.remove("id")
         MapperCreator.mapper.update(element, update)
         validate(element)
     }
