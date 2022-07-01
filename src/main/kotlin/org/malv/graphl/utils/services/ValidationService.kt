@@ -20,9 +20,7 @@ public open class ValidationService<T> {
         val factory = Validation.buildDefaultValidatorFactory()
         val validator = factory.validator
         val validate = validator.validate(element)
-
         if (validate.isEmpty()) return
-
         throw graphqlErrors(validate.associateBy({it.field}, {it.message}))
 
     }
