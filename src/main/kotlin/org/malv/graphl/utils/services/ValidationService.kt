@@ -9,9 +9,11 @@ import org.malv.graphl.utils.graphqlErrors
 import org.malv.graphl.utils.json.MapperCreator
 import org.malv.graphl.utils.json.update
 import org.malv.graphl.utils.tryOrNull
+import org.springframework.boot.jackson.JsonComponent
 import java.lang.reflect.ParameterizedType
 import javax.validation.Validation
 
+@JsonComponent
 public abstract class ValidationService<T> : JsonDeserializer<T>()  {
 
 
@@ -21,13 +23,13 @@ public abstract class ValidationService<T> : JsonDeserializer<T>()  {
 
 
 
-    public open fun update(update: Input, element: T) {
+    public fun update(update: Input, element: T) {
         JsonMapper.mapper.update(element, update)
         validate(element)
     }
 
 
-    public open fun validate(element: T) {
+    public fun validate(element: T) {
         val factory = Validation.buildDefaultValidatorFactory()
         val validator = factory.validator
         val validate = validator.validate(element)
