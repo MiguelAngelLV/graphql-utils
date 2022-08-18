@@ -46,3 +46,14 @@ public fun Input.removeEmpty(key: String) {
 public fun <T> QuerydslPredicateExecutor<T>.findOneOrNull(predicate: Predicate): T? {
     return findOne(predicate).orElse(null)
 }
+
+
+public fun <T> tryOrNull(operation: () -> T): T? {
+
+    return try {
+        operation()
+    } catch (e: Exception) {
+        null
+    }
+
+}

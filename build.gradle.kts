@@ -1,8 +1,8 @@
 
 plugins {
-    kotlin("jvm") version "1.6.10"
-    kotlin("plugin.spring") version "1.6.10"
-    kotlin("kapt") version "1.6.10"
+    kotlin("jvm") version "1.7.10"
+    kotlin("plugin.spring") version "1.7.10"
+    kotlin("kapt") version "1.7.10"
     `maven-publish`
 
 }
@@ -36,14 +36,14 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 
 dependencies {
     //Spring
-    implementation("org.springframework.boot:spring-boot-starter-web:2.6.1")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa:2.6.1")
-    implementation("org.testng:testng:7.4.0")
+    implementation("org.springframework.boot:spring-boot-starter-web:2.7.2")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa:2.7.2")
+    implementation("org.testng:testng:7.6.1")
 
 
     //Kotlin
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.6.0")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.0")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.10")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.10")
 
 
     //Graphql
